@@ -15,11 +15,11 @@ five = pygame.mixer.Sound("5.2.wav")
 eight = pygame.mixer.Sound("8.1.wav")
 
 # Set the BPM for the drum beat
-bpm = 120
+bpm = 33
 beat_duration = 60 / bpm  # Duration of one beat in seconds
 
 # Define the number of beats for continuous playback
-num_beats = 16
+num_beats = 33
 
 def play_drum_beat():
     while running:
