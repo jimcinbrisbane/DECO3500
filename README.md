@@ -1,7 +1,7 @@
 # DECO3500
-###cox
+### cox
 1. Download the required packages using `python -m pip install pygame pyserial`.
-2. If you're on Windows, search for and open "Device Manager" to check the ports.
+2. Search for and open "Device Manager" to check the ports if you're on Windows.
 * ![image](https://github.com/user-attachments/assets/c2bd94f3-81cb-4ded-a3a1-6d2682410539)
 3. On Mac or Linux, use the command `dmesg | grep tty`.
 4. Ensure both Arduinos are connected to your device.
