@@ -1,43 +1,10 @@
-1.Stroke Rate (if too fast or too slow):
-1.1"Slow down, keep it steady!"
-1.2"Maintain your momentum"
-1.3."Great pace! keep it steady"
-1.4"You're dropping! you need to pick it up to maintain that rhythm!"
-2. Power
-2.1"Great power, Keep pushing"
-2.2"Drive harder with each stroke!"
-2.3"Keep pushing, keep that energy up, maximum efficiency!"
-2.4"Your power's dropping, engage your legs, I need you to do a stronger pull."
-3 Stroke Length:
-3.1"Reach all the way forward to get the most out of each pull."
-3.2"Your strokes are getting shorter, extend and drive through the legs."
-Split Time (500m time):
-4.1 "Good pace! You're on track."
-4.2 "Bring it down on the next push!"
-4.3 let's keep that momentum going."
-Technique Feedback:
-5.1"Keep your back straight and drive through your legs."
-5.2"Engage your core, and let your arms finish the stroke."
-Motivation:
-6.1"You're halfway through! Keep pushing, you're doing great!"
-6.2"Final stretch—let's power through!"
-Heart Rate (if integrated with a heart rate monitor):
-7.1"keep it up"
-7.2"ease up, you're going too fast."
-7.3You’re doing well! Keep this pace"
-7.4"Ease off, Back it down"
-Distance Covered:
-8.1"You're halfway through—stay strong and focus on consistent strokes."
-8.2" Last 200 meters! Power through! Keep Going"
-Stroke Length:
-9.1"You’re shortening your stroke, I need you to reach all the way forward and drive with your legs."
-9.2"Very Good! Great stroke length! Keep extending fully and power through."
-Motivation:
-10.1"Power 10! Maximum effort for the next 10 strokes!"
-10.2"Keep pushing, you're stronger than this!"
-Form and Technique:
-11.1"Watch your form—keep your back straight and drive through your legs, not just your arms."
-11.2"Engage your core, let your arms finish the stroke cleanly."
-Recovery:
-12.1"Okay we’re gonna ease off on the next 20 strokes"
-
+1. Download the required packages using `python -m pip install pygame pyserial`.
+2. If you're on Windows, search for and open "Device Manager" to check the ports.
+* ![image](https://github.com/user-attachments/assets/c2bd94f3-81cb-4ded-a3a1-6d2682410539)
+3. On Mac or Linux, use the command `dmesg | grep tty`.
+4. Ensure both Arduinos are connected to your device.
+5. Once connected, check again; the two new devices that appear will be the COM numbers for the Arduinos.
+6. Ensure you're in the correct directory with `cd cox`.
+7. Edit drum.py to ensure the COM port matches the incoming device.
+8. Save the changes.
+9. Run the file using `python new.py`.
