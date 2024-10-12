@@ -10,3 +10,11 @@
 7. Edit drum.py to ensure the COM port matches the incoming device.
 8. Save the changes.
 9. Run the file using `python new.py`.
+
+### Arduino
+1. connect the ultrasound sensor and LED light on the port according to the script
+* TRIG_PIN 9
+* ECHO_PIN 10
+* LED_PIN 13 
+2. stick the device on the back of the rowing machine
+3. connect to the device running cox 
