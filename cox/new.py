@@ -72,7 +72,7 @@ def play_random_sound(group):
         sound = random.choice(sounds[group])
         sound.play()
 
-# Define timer functions
+# time based triggers
 def timer_30s():
     time.sleep(30)
     if not pygame.mixer.get_busy():
@@ -89,6 +89,7 @@ def timer_1min():
 threading.Thread(target=timer_30s, daemon=True).start()
 threading.Thread(target=timer_1min, daemon=True).start()
 
+## working context-aware cox
 # Initialize serial connections
 arduino1 = serial.Serial('COM5', 9600, timeout=1)
 arduino2 = serial.Serial('COM6', 9600, timeout=1)
@@ -116,62 +117,89 @@ drop2 = pygame.mixer.Sound("5.1.wav")
 drop3 = pygame.mixer.Sound("5.2.wav")
 half = pygame.mixer.Sound("6.1.wav")
 done = pygame.mixer.Sound("6.2.wav")
+out =  pygame.mixer.Sound("OUTTATIME.mp3")
 # Function to handle Arduino data reading in a thread
+outSync = 0
 def monitor_speeds():
-    counter = 0
+    counter = 0 # move the number up if people are really good and know what they are doing
+    #counter as encouragement
+    outSync = 0 # to do: make the out of sync trigger based on the distance of the ultrasound sensor.
+
     while running:
             # Read speed data from both Arduinos
         speed1 = read_speed(arduino1)
+        # timestamp1 = "" to do for more better out of sync trigger
         speed2 = read_speed(arduino2)
-
+        # timestamp2 = ""
+        # if speed1 != 
         # Ensure both speeds are valid before comparison
         if speed1 is not None and speed2 is not None:
             print(f"5:({speed1}), 6:({speed2})")
-            if speed1 > 49 or speed2 > 49:
+
+
+            if speed1 > speed2:
+                if (speed1 - speed2) > 11:
+                    print(f"Arduino 1 is faster by {speed1 - speed2:.2f}")
+                    if not pygame.mixer.get_busy():
+                        out.play()
+                else:
+                    print(f"same")
+                    if counter == 1:
+                        if not pygame.mixer.get_busy():
+                            four.play()
+                            counter = 0
+                    else:
+                        counter = 1
+
+                # else:
+                #     counter = counter + 1
+            elif speed2 > speed1:
+                if (speed2 - speed1) > 11:
+                    print(f"Arduino 2 is faster by {speed2 - speed1:.2f}")
+                    if not pygame.mixer.get_busy():
+                        out.play()
+                else:
+                    print(f"same")
+                    if not pygame.mixer.get_busy():
+                        four.play()
+
+                # else:
+                #     counter = counter + 1
+            else:
+                print(f"same")
+                # if not pygame.mixer.get_busy():
+                #         four.play()
+                # counter = counter + 1
+            if speed1 > 30 or speed2 > 30:
                     print("really fast")
                     if not pygame.mixer.get_busy():
                         nine.play()
-            if speed1 < 29 or speed2 < 29:
+            elif speed1 < 20 or speed2 < 20:
                     print("really slow")
                     if not pygame.mixer.get_busy():
                         two.play()
-            if counter > 3:
-                print("good work")
-                if not pygame.mixer.get_busy():
-                        four.play()
-                counter = 0
+            # if people are really bad at staying in sync uncomment this
+            # else:
+            #     print("good work")
+            #     if counter == 1:
+            #         if not pygame.mixer.get_busy():
+            #             four.play()
+            #             counter = 0
+            #     else:
+            #         counter = 1
                 
-
-            if speed1 > speed2:
-                if (speed1 - speed2) > 50:
-                    print(f"Arduino 1 is faster by {speed1 - speed2:.2f}")
-                    if not pygame.mixer.get_busy():
-                        drop.play()
-                    counter = 0
-                else:
-                    counter = counter + 1
-            elif speed2 > speed1:
-                if (speed2 - speed1) > 50:
-                    print(f"Arduino 2 is faster by {speed2 - speed1:.2f}")
-                    if not pygame.mixer.get_busy():
-                        drop2.play()
-                    counter = 0
-                else:
-                    counter = counter + 1
-            else:
-                print(f"same")
-                counter = counter + 1
+                
                 
 
         # Wait a bit before reading the next set of values
         time.sleep(0.5)
-# Set up Pygame display
+# Set up Pygame display, when the display close, the session is closed.
 screen = pygame.display.set_mode((640, 480))
 pygame.display.set_caption("Press 'x' to play trigger sound")
 running = True
 threading.Thread(target=monitor_speeds, daemon=True).start()
 
-# Game loop
+#addtional sound pad triggers
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
