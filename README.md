@@ -18,3 +18,12 @@
 * LED_PIN 13 
 2. stick the device on the back of the rowing machine
 3. connect to the device running cox 
+
+### Unity 
+1. Open the project in Unity
+
+2. Launch Unity Hub and select the appropriate version of Unity.
+
+3. Install any required packages:
+   Go to Window > Package Manager and ensure all necessary packages are installed
+4. Press Play to run the project in the Unity Editor.
